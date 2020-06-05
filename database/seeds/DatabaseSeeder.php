@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
                 'city' => 'cairo',
                 'address' => '15 mahmoud hafez street safir',
                 'phone' => '01278249244',
-                'email' => 'hosptial@gmail.com',
+                'username' => 'hospital1',
                 'password' => '123',
                 'capacity' => '200',
                 'checkins' => '50',
