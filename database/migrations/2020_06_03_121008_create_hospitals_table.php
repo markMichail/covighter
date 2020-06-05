@@ -19,7 +19,7 @@ class CreateHospitalsTable extends Migration
             $table->string('city');
             $table->string('address');
             $table->string('phone');
-            $table->string('email')->unique();
+            $table->string('username')->unique();
             $table->string('password');
             $table->integer('capacity')->default(0);
             $table->integer('checkins')->default(0);
