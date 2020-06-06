@@ -47,11 +47,6 @@
             <label for="formGroupExampleInput">عدد الدخول</label>
             <input type="text" class="form-control" name="checkins">
         </div>
-
-        <div class="form-group">
-            <label for="formGroupExampleInput2">عدد الخروج</label>
-            <input type="number" class="form-control" name="checkouts">
-        </div>
         <div class="form-group">
             <label for="formGroupExampleInput2">اسم المستخدم</label>
             <input type="text" class="form-control" name="username">

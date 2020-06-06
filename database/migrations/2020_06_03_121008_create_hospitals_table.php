@@ -15,7 +15,6 @@ class CreateHospitalsTable extends Migration
     {
         Schema::create('hospitals', function (Blueprint $table) {
             $table->id();
-            $table->integer("hospital_id");
             $table->string('name');
             $table->string('city');
             $table->string('address');

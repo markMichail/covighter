@@ -54,7 +54,6 @@ class HospitalController extends Controller
                 'password' => 'required|max:255',
                 'capacity' => 'required|Numeric',
                 'checkins' => 'required|Numeric',
-                'checkouts' => 'required|Numeric',
             ]);
             $hospital = new Hospital();
             $hospital->name = $request->name;
@@ -65,7 +64,6 @@ class HospitalController extends Controller
             $hospital->password = Hash::make($request->password);
             $hospital->capacity = $request->capacity;
             $hospital->checkins = $request->checkins;
-            $hospital->checkouts = $request->checkouts;
             $hospital->save();
             DB::table('users')->insert(
                 [
