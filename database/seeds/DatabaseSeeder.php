@@ -19,13 +19,6 @@ class DatabaseSeeder extends Seeder
                 'privilege' => 0,
                 'remember_token' => Str::random(10),
             ),
-
-            array(
-                'username' => 'heidar',
-                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-                'privilege' => 1,
-                'remember_token' => Str::random(10),
-            ),
         ));
 
         DB::table('hospitals')->insert(array(
