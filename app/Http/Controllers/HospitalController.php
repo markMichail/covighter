@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Hospital;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class HospitalController extends Controller
 {
@@ -19,7 +21,6 @@ class HospitalController extends Controller
 
     public function index(Request $request)
     {
-        $request->session()->forget('addhospitalstatus');
         $hospitals =  Hospital::all();
         return view('hospitals', compact('hospitals'));
     }
@@ -31,11 +32,8 @@ class HospitalController extends Controller
      */
     public function create(Request $request)
     {
-        if (isset($_POST['addhospital'])) {
-            $hospitals =  Hospital::all();
-            $request->session()->put('addhospitalstatus', 'تم اضافة المستشفي');
-            return view('hospitals', compact('hospitals'));
-        }
+        $request->session()->forget('addhospitalstatus');
+        return view('addhospital');
     }
 
     /**
@@ -46,7 +44,41 @@ class HospitalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (isset($_POST['addhospital'])) {
+            $validatedData = $request->validate([
+                'name' => 'required|max:255',
+                'city' => 'required|max:255',
+                'address' => 'required|max:255',
+                'phone' => 'required|Numeric',
+                'username' => 'required|unique:users|max:255',
+                'password' => 'required|max:255',
+                'capacity' => 'required|Numeric',
+                'checkins' => 'required|Numeric',
+                'checkouts' => 'required|Numeric',
+            ]);
+            $hospital = new Hospital();
+            $hospital->name = $request->name;
+            $hospital->city = $request->city;
+            $hospital->address = $request->address;
+            $hospital->phone = $request->phone;
+            $hospital->username = $request->username;
+            $hospital->password = Hash::make($request->password);
+            $hospital->capacity = $request->capacity;
+            $hospital->checkins = $request->checkins;
+            $hospital->checkouts = $request->checkouts;
+            $hospital->save();
+            DB::table('users')->insert(
+                [
+                    'username' => $request->username,
+                    'password' => Hash::make($request->password),
+                    'privilege' => 1,
+                    'remember_token' => ""
+                ]
+            );
+
+            $request->session()->put('addhospitalstatus', 'تم اضافة المستشفي');
+            return view('addhospital');
+        }
     }
 
     /**

@@ -14,12 +14,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'WelcomeController@index');
+Route::get('/test', 'WelcomeController@test')->name('test');
+Route::post('/test', 'WelcomeController@checktest')->name('checktest');
+
 
 Auth::routes(['register' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/hospitals', 'HospitalController@index')->name('hospitals');
-Route::post('/hospitals', 'HospitalController@create')->name('createhospitals');
-Route::get('/updatehospital', 'HospitalController@update')->name('updatehospitals');
+Route::get('/addhospital', 'HospitalController@create')->name('addhospital');
+Route::post('/addhospital', 'HospitalController@store')->name('createhospitals');
+
+
+// Route::get('/updatehospital', 'HospitalController@update')->name('updatehospitals');
 Route::get('/patients', 'PatientController@index')->name('patients');
+Route::get('/addpatient', 'PatientController@create')->name('addpatient');
+Route::post('/addpatient', 'PatientController@store')->name('createpatient');
+Route::get('/exitpatient', 'PatientController@exit')->name('exitpatient');
+Route::post('/exitpatient', 'PatientController@update')->name('updatepatient');

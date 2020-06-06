@@ -20,7 +20,7 @@ class CreatePatientsTable extends Migration
             $table->string('mobile');
             $table->date('birthdate');
             $table->date('checkin');
-            $table->date('checkout');
+            $table->date('checkout')->nullable();
             $table->timestamps();
         });
     }

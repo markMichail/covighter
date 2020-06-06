@@ -5,11 +5,10 @@
 <div class="container justify-content-center">
     <div class="card">
         <div class="card-header">Dashboard</div>
-
         <div class="card-body">
-            @if (session('status'))
+            @if (session('exitpatientstatus'))
             <div class="alert alert-success" role="alert">
-                {{ session('status') }}
+                {{ session('exitpatientstatus') }}
             </div>
             @endif
             <div class="table-responsive text-nowrap">
@@ -32,7 +31,17 @@
                             <td>{{ $patient->national_id }}</td>
                             <td>{{ $patient->mobile }}</td>
                             <td>{{ $patient->checkin }}</td>
-                            <td>{{ $patient->checkout == null ? "" : $patient->checkout}}</td>
+
+                            <td>
+                                <form method="POST" action="">
+                                    {{ csrf_field() }}
+                                    <div class="form-group">
+                                        <input type="hidden" name="national_id" value="{{ $patient->national_id }}">
+                                        <input type="submit" onclick="return confirm('تاكيد ؟')"
+                                            class="btn btn-danger delete-user" value="خروج">
+                                    </div>
+                                </form>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>

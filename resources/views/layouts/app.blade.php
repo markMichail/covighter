@@ -62,7 +62,10 @@
                         <!-- Authentication Links -->
                         @guest
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <a class="nav-link" href="{{ route('test') }}">{{ __('تحليل') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('تسجيل دخول') }}</a>
                         </li>
                         @if (Route::has('register'))
                         <li class="nav-item">
@@ -70,6 +73,25 @@
                         </li>
                         @endif
                         @else
+                        @if (Auth::user()->privilege == 0) {{-- الوزارة --}}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('hospitals') }}">{{ __('المستشفيات') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('addhospital') }}">{{ __('اضافة مستشفي') }}</a>
+                        </li>
+                        @endif
+                        @if (Auth::user()->privilege == 1) {{-- المستشفي --}}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('patients') }}">{{ __('المرضي') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('addpatient') }}">{{ __('دخول مريض') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('exitpatient') }}">{{ __('خروج مريض') }}</a>
+                        </li>
+                        @endif
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -79,7 +101,7 @@
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
+                                    {{ __('خروج') }}
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST"
@@ -88,6 +110,7 @@
                                 </form>
                             </div>
                         </li>
+
                         @endguest
                     </ul>
                 </div>
